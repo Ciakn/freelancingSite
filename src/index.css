@@ -51,7 +51,13 @@
     }
   }
 }
-
+label {
+  display: block;
+}
+.container {
+  background-color: rgba(218, 218, 218, 0.446);
+  height: 100vh;
+}
 .rti--container {
   background-color: rgb(var(--color-secondary-100));
   --rti-radius: 0.375rem;
