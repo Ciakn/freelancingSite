@@ -3,9 +3,12 @@ import Input from "../../ui/Input";
 
 const SendOtpForm = () => {
   const [phoneNumber, setPhoneNumbber] = useState("");
+  const sendOtpHandler = (e) => {
+    e.preventDefault();
+  };
   return (
     <div>
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={sendOtpHandler}>
         <Input
           label={"شماره مبایل"}
           value={phoneNumber}
@@ -13,7 +16,7 @@ const SendOtpForm = () => {
           name={"phoneNumber"}
           type={"number"}
         />
-        <button className="btn btn--primary w-full">ارسال کد تایید</button>
+        <button type="submit" className="btn btn--primary w-full">ارسال کد تایید</button>
       </form>
     </div>
   );
