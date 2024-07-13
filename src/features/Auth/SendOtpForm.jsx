@@ -5,7 +5,7 @@ import { getOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loader from "../../ui/Loader";
 
-const SendOtpForm = () => {
+const SendOtpForm = ({setStep}) => {
   const [phoneNumber, setPhoneNumbber] = useState("");
   const { isPending, error, data, mutateAsync } = useMutation({
     mutationFn: getOtp,
@@ -15,7 +15,7 @@ const SendOtpForm = () => {
     try {
       const data = await mutateAsync({ phoneNumber });
       toast.success(data.message);
-      console.log(data);
+      setStep(2)
     } catch (error) {
       toast.error("خطایی رخ داده", error?.response?.data?.message);
     }

@@ -7,7 +7,7 @@ const AuthContainer = () => {
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <SendOtpForm />;
+            return <SendOtpForm setStep={setStep } />;
 
       case 2:
         return <CheckOtpForm />;

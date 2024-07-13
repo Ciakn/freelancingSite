@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import { ThreeDots } from "react-loader-spinner";
 
-const Loader = () => {
+const Loader = ({ width = "75px", height = "40px" }) => {
   return (
-    <div>Loader</div>
-  )
-}
+    <ThreeDots
+      height={height}
+      width={width}
+      radius={9}
+      color="rgb(var(--color-primary-900))"
+      wrapperStyle={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+      visible={true}
+    />
+  );
+};
 
-export default Loader
+export default Loader;
