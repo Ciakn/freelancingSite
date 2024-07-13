@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import Input from "../../ui/Input";
+import { useMutation } from "@tanstack/react-query";
+import { getOtp } from "../../services/authService";
+import toast from "react-hot-toast";
+import Loader from "../../ui/Loader";
 
 const SendOtpForm = () => {
   const [phoneNumber, setPhoneNumbber] = useState("");
-  const sendOtpHandler = (e) => {
+  const { isPending, error, data, mutateAsync } = useMutation({
+    mutationFn: getOtp,
+  });
+  const sendOtpHandler = async (e) => {
     e.preventDefault();
+    try {
+      const data = await mutateAsync({ phoneNumber });
+      toast.success(data.message);
+      console.log(data);
+    } catch (error) {
+      toast.error("خطایی رخ داده", error?.response?.data?.message);
+    }
   };
   return (
     <div>
@@ -16,7 +30,15 @@ const SendOtpForm = () => {
           name={"phoneNumber"}
           type={"number"}
         />
-        <button type="submit" className="btn btn--primary w-full">ارسال کد تایید</button>
+        <div>
+          {isPending ? (
+            <Loader />
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">
+              ارسال کد تایید
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
