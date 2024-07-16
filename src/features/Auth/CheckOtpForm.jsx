@@ -1,18 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { checkOtp } from "../../services/authService";
 import http from "../../services/httpServices";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft } from "react-icons/hi";
-
-const CheckOtpForm = ({ phoneNumber , onBack }) => {
+const RESEND_TIME = 90;
+const CheckOtpForm = ({ phoneNumber, onBack, onResendOtp }) => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState();
+  const [otp, setOtp] = useState("");
+  const [time, setTime] = useState(RESEND_TIME);
   const { mutateAsync, isPending, error, data } = useMutation({
     mutationFn: checkOtp,
   });
+  
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
@@ -28,12 +30,27 @@ const CheckOtpForm = ({ phoneNumber , onBack }) => {
       toast.error("خطایی رخ داده", error?.response?.data?.message);
     }
   };
+  useEffect(() => {
+    const otpTimer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
+    return () => {
+      if (otpTimer) {
+        clearInterval(otpTimer);
+      }
+    };
+  }, [time]);
   return (
     <div>
       <button onClick={onBack}>
         {" "}
         <HiArrowCircleLeft className="w-6 h-6 text-secondary-600" />{" "}
       </button>
+      <div className="mb-4 text-secondary-500">
+        {time > 0 ? (
+          <p> تا ارسال مجدد کد {time}</p>
+        ) : (
+          <button onClick={() => onResendOtp}>ارسال مجدد کد</button>
+        )}
+      </div>
       <form className="space-y-5" onSubmit={checkOtpHandler}>
         <p className="font-bold flex justify-center text-secondary-800">
           کد تایید را وارد کنید
