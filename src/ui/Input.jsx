@@ -1,9 +1,10 @@
 import React from "react";
 
-const Input = ({ label, value, onChange, name, type }) => {
+const Input = ({ label,
+  value, onChange, name, type }) => {
   console.log(value);
   return (
-    <div>
+    <div className="w-full">
       <label className="mb-1" htmlFor={name}>
         {label}
       </label>
@@ -12,8 +13,8 @@ const Input = ({ label, value, onChange, name, type }) => {
         type={type}
         value={value}
         onChange={onChange}
-              className="textField__input"
-              autoComplete="off"
+        className="textField__input"
+        autoComplete="off"
       />
     </div>
   );
