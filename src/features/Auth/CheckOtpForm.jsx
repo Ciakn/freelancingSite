@@ -51,11 +51,10 @@ const CheckOtpForm = ({
         <HiArrowCircleLeft className="w-6 h-6 text-secondary-600" />{" "}
       </button>
       {otpResponse && (
-        <p>
+        <p className="flex items-center gap-x-2 my-4">
           {otpResponse?.message}
-          <button>
+          <button onClick={onBack}>
             <CiEdit />
-            سلام
           </button>
         </p>
       )}
