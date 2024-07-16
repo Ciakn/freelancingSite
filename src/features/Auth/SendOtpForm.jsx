@@ -14,7 +14,7 @@ const SendOtpForm = ({ isPending, phoneNumber, onChange, sendOtpHandler }) => {
           value={phoneNumber}
           onChange={onChange}
           name={"phoneNumber"}
-          type={"number"}
+          type={"text"}
         />
         <div>
           {isPending ? (

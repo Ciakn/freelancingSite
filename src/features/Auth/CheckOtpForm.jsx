@@ -6,15 +6,21 @@ import http from "../../services/httpServices";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft } from "react-icons/hi";
-const RESEND_TIME = 90;
-const CheckOtpForm = ({ phoneNumber, onBack, onResendOtp }) => {
+import { CiEdit } from "react-icons/ci";
+const RESEND_TIME = 10;
+const CheckOtpForm = ({
+  phoneNumber,
+  onBack,
+  otpResponse,
+  onResendOtp,
+}) => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_TIME);
   const { mutateAsync, isPending, error, data } = useMutation({
     mutationFn: checkOtp,
   });
-  
+
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
@@ -44,11 +50,20 @@ const CheckOtpForm = ({ phoneNumber, onBack, onResendOtp }) => {
         {" "}
         <HiArrowCircleLeft className="w-6 h-6 text-secondary-600" />{" "}
       </button>
+      {otpResponse && (
+        <p>
+          {otpResponse?.message}
+          <button>
+            <CiEdit />
+            سلام
+          </button>
+        </p>
+      )}
       <div className="mb-4 text-secondary-500">
         {time > 0 ? (
           <p> تا ارسال مجدد کد {time}</p>
         ) : (
-          <button onClick={() => onResendOtp}>ارسال مجدد کد</button>
+          <button onClick={onResendOtp}>ارسال مجدد کد</button>
         )}
       </div>
       <form className="space-y-5" onSubmit={checkOtpHandler}>
