@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { HiArrowCircleLeft } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 const RESEND_TIME = 10;
+
 const CheckOtpForm = ({
   phoneNumber,
   onBack,
@@ -23,6 +24,7 @@ const CheckOtpForm = ({
 
   const checkOtpHandler = async (e) => {
     e.preventDefault();
+
     try {
       const { message, user } = await mutateAsync({ phoneNumber, otp });
       console.log(user);

@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import Input from "../../ui/Input";
 import RadioInput from "../../ui/RadioInput";
+import { useMutation } from "@tanstack/react-query";
+import { CompleteProfile } from "../../services/authService";
+import toast from "react-hot-toast";
+
 const CompleteProfileForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const handleSubmit = (e) => {
+  const { isPending, data, mutateAsync } = useMutation({
+    mutationFn: CompleteProfile,
+  });
+  const handleSubmit = async (e) => {
+    console.log("s");
     e.preventDefault();
-    
+    try {
+      const { message } = await mutateAsync({ name, role, email });
+      console.log("send");
+      toast.success(message);
+    } catch (error) {}
   };
   return (
     <div className="flex justify-center items-center h-[100vh] ">
