@@ -4,7 +4,6 @@ import { useMutation } from "@tanstack/react-query";
 import { getOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loader from "../../ui/Loader";
-
 const SendOtpForm = ({ isPending, phoneNumber, onChange, sendOtpHandler }) => {
   return (
     <div>
