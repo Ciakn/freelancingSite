@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Input from "../../ui/Input";
+import RadioInput from "../../ui/RadioInput";
 const CompleteProfileForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,27 +23,23 @@ const CompleteProfileForm = () => {
             value={email}
           />
           <div className="flex justify-center gap-5 items-center">
-            <div className="flex justify-center items-center gap-x-2 text-secondary-600">
-              <label htmlFor="FREELANCER">فریلنسر</label>{" "}
-              <input
-                className="cursor-pointer focus:ring-0 form-radio text-red-500 "
-                type="radio"
-                id="FREELANCER"
-                value="FREELANCER"
-                name="role"
-              />
-            </div>
-            <div className="flex justify-center items-center gap-x-2 text-secondary-600">
-              <label htmlFor="OWNER">کارفرما </label>
-              <input
-                className="cursor-pointer focus:ring-0 form-radio text-red-500 "
-                type="radio"
-                name="role"
-                value="OWNER"
-                id="OWNER"
-              />
-            </div>
+            <RadioInput
+              type="radio"
+              value="FREELANCER"
+              name="role"
+              id="FREELANCER"
+              label={"فریلنسر"}
+              onChange={""}
+            />
           </div>
+          <RadioInput
+            type="radio"
+            value="OWNER"
+            name="role"
+            id="OWNER"
+            label={"کارفرما"}
+            onChange={""}
+          />
           <button className="btn btn--primary w-full">تایید</button>
         </form>
       </div>
