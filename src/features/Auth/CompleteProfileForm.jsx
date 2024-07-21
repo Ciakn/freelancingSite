@@ -4,10 +4,15 @@ import RadioInput from "../../ui/RadioInput";
 const CompleteProfileForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+  };
   return (
     <div className="flex justify-center items-center h-[100vh] ">
       <div className=" w-full sm:max-w-sm ">
-        <form className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-8">
           <Input
             label={"نام و نام خانوادگی"}
             name={"name"}
@@ -29,7 +34,8 @@ const CompleteProfileForm = () => {
               name="role"
               id="FREELANCER"
               label={"فریلنسر"}
-              onChange={""}
+              onChange={(e) => setRole(e.target.value)}
+              checked={role === "FREELANCER"}
             />
           </div>
           <RadioInput
@@ -38,7 +44,8 @@ const CompleteProfileForm = () => {
             name="role"
             id="OWNER"
             label={"کارفرما"}
-            onChange={""}
+            onChange={(e) => setRole(e.target.value)}
+            checked={role === "OWNER"}
           />
           <button className="btn btn--primary w-full">تایید</button>
         </form>

@@ -2,7 +2,9 @@ import React from "react";
 
 const Input = ({ label,
   value, onChange, name, type }) => {
-  console.log(value);
+  console.log(
+    `log input`
+  );
   return (
     <div className="w-full">
       <label className="mb-1" htmlFor={name}>
