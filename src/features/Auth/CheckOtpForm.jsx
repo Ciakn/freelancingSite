@@ -9,12 +9,7 @@ import { HiArrowCircleLeft } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
 const RESEND_TIME = 10;
 
-const CheckOtpForm = ({
-  phoneNumber,
-  onBack,
-  otpResponse,
-  onResendOtp,
-}) => {
+const CheckOtpForm = ({ phoneNumber, onBack, otpResponse, onResendOtp }) => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(RESEND_TIME);
@@ -27,13 +22,15 @@ const CheckOtpForm = ({
 
     try {
       const { message, user } = await mutateAsync({ phoneNumber, otp });
-      console.log(user);
       toast.success(message);
-      if (user.isActive) {
+      if (!user.isActive) return navigate("/complete-profile");
+      if (user.status !== 2) {
         navigate("/");
-      } else {
-        navigate("/complete-profile");
+        toast.error("پروفایل شما در دست بررسی است");
+        return;
       }
+      if (user.role === "OWNER") return navigate("/owner");
+      if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error("خطایی رخ داده", error?.response?.data?.message);
     }

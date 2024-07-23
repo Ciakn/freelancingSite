@@ -4,6 +4,7 @@ import RadioInput from "../../ui/RadioInput";
 import { useMutation } from "@tanstack/react-query";
 import { CompleteProfile } from "../../services/authService";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CompleteProfileForm = () => {
   const [name, setName] = useState("");
@@ -12,14 +13,24 @@ const CompleteProfileForm = () => {
   const { isPending, data, mutateAsync } = useMutation({
     mutationFn: CompleteProfile,
   });
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    console.log("s");
     e.preventDefault();
     try {
-      const { message } = await mutateAsync({ name, role, email });
-      console.log("send");
-      toast.success(message);
-    } catch (error) {}
+      const { message, user } = await mutateAsync({ name, email, role });
+      console.log(user);
+
+      if (user.status !== 2) {
+        navigate("/");
+        toast.error("پروفایل شما در دست بررسی است");
+        return;
+      }
+      if (user.role === "OWNER") return navigate("/owner");
+      if (user.role === "FREELANCER") return navigate("/freelancer");
+    } catch (error) {
+      console.log(error);
+      toast.error("خطایی رخ داده", error);
+    }
   };
   return (
     <div className="flex justify-center items-center h-[100vh] ">
