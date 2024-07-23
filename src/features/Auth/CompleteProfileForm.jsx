@@ -18,11 +18,9 @@ const CompleteProfileForm = () => {
     e.preventDefault();
     try {
       const { message, user } = await mutateAsync({ name, email, role });
-      console.log(user);
-
       if (user.status !== 2) {
         navigate("/");
-        toast.error("پروفایل شما در دست بررسی است");
+        toast.success("پروفایل شما در دست بررسی است");
         return;
       }
       if (user.role === "OWNER") return navigate("/owner");
