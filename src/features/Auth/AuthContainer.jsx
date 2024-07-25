@@ -7,7 +7,7 @@ import { getOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 const AuthContainer = () => {
   const [step, setStep] = useState(2);
-  const [phoneNumber, setPhoneNumbber] = useState("09363443654");
+  const [phoneNumber, setPhoneNumbber] = useState("09363443653");
   const {
     isPending,
     error,

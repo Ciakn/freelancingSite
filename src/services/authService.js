@@ -11,6 +11,6 @@ export function CompleteProfile(data) {
 }
 export function getUser(data) {
   return http
-    .post("/user/profile", data)
+    .get("/user/profile", data)
     .then(({ data }) => data.data);
 }
