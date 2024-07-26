@@ -21,8 +21,8 @@ const App = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/complete-profile" element={<CompleteProfilePage />} />
         <Route path="/owner" element={<AppLayout />}>
-          <Route index element={<Navigate to="dashbord"><OwnerDashbord/></Navigate>} />
-          <Route path="/ownerdashbord" element={<OwnerDashbord />} />
+          <Route index element={<Navigate to="dashboard"><OwnerDashbord/></Navigate>} />
+          <Route path="/ownerdashboard" element={<OwnerDashbord />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<Project />} />
           <Route path="freelancer" element={<Freelancer />} />
